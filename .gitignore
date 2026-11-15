@@ -1,0 +1,34 @@
+# ESP-IDF and compiler outputs
+build/
+managed_components/
+dependencies.lock
+sdkconfig.old
+*.elf
+*.map
+*.o
+*.obj
+*.a
+*.exe
+*.bin.tmp
+
+# Local tools, IDE state and logs
+.vscode/
+.idea/
+*.log
+*.trace
+build_error.txt
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# Local serial captures, test artifacts and private credentials
+*.pem
+*.key
+.env
+.env.*
+secrets.*
+tests/simulation-build/
+tests/research-layout/
+tests/research-build/
