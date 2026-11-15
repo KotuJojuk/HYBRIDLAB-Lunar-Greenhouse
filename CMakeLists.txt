@@ -1,8 +1,30 @@
-# For more information about build system see
-# https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html
-# The following five lines of boilerplate have to be in your project's
-# CMakeLists in this exact order for cmake to work correctly
-cmake_minimum_required(VERSION 3.16)
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-add_compile_options("-Wno-attributes")
-project(HidroLabMini)
+idf_component_register(
+    SRCS
+        "main.c"
+        "hidrolab_control.c"
+        "hidrolab_buzzer.c"
+        "hidrolab_scheduler.c"
+        "hidrolab_settings.c"
+        "hidrolab_wifi.c"
+        "hidrolab_time.c"
+        "hidrolab_font_tr.c"
+        "hidrolab_assets.c"
+        "hidrolab_brand_asset.c"
+        "hidrolab_ui.c"
+        "hidrolab_simulation.c"
+        "hidrolab_simulation_ui.c"
+        "hidrolab_simulation_runtime.c"
+        "hidrolab_simulation_store.c"
+        "hidrolab_nasa_data.c"
+        "hidrolab_science_questions.c"
+
+        "waveshare_rgb_lcd_port.c"
+        "lvgl_port.c"
+    INCLUDE_DIRS "."
+    REQUIRES driver esp_timer nvs_flash esp_wifi esp_event esp_netif lwip spiffs
+)
+
+spiffs_create_partition_image(spiffs spiffs FLASH_IN_PROJECT)
+
+idf_component_get_property(lvgl_lib lvgl__lvgl COMPONENT_LIB)
+target_compile_options(${lvgl_lib} PRIVATE -Wno-format)
